@@ -1,20 +1,21 @@
-<html>
-    <head>
-        <title>Bus reservation "JanuszTrans"</title>
-    </head>
-    <body>
-		{% for Bus in buses %}
-		    <div>
-			<h2>Model: {{ Bus.brand }}</h2>
-			<p>Plate: {{ Bus.plate_nr }}</p>
-			<p>Capacity: {{ Bus.people_capacity }}</p>
-			<p>Price/km: {{ Bus.price_per_km }}</p>
-			<p>Description: {{ Bus.description }}</p>
-			<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
-			<p></p>
-			
+{% extends 'busreserv/base.html' %}
 
-		    </div>
-		{% endfor %} 
-    </body>
-</html>
+
+{% block content %}
+	
+	
+		
+
+		{% for Bus in buses %}
+			    <div class="bus">
+				<h2>Model: {{ Bus.brand }}</h2>
+				<p>Plate: {{ Bus.plate_nr }}</p>
+				<p>Capacity: {{ Bus.people_capacity }}</p>
+				<p>Price/km: {{ Bus.price_per_km }}</p>
+				<p>Description: {{ Bus.description }}</p>
+				<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
+				<p><a href="{% url 'edit_vehicle' pk=Bus.pk %}">Edytuj pojazd</a></p>
+
+			    </div>
+		{% endfor %}
+{% endblock content %}
