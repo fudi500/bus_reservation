@@ -3,19 +3,18 @@
         <title>Bus reservation "JanuszTrans"</title>
     </head>
     <body>
-        <div>
-            <h1><a href="">Bus reservation "JanuszTrans"</a></h1>
-        </div>
+		{% for Bus in buses %}
+		    <div>
+			<h2>Model: {{ Bus.brand }}</h2>
+			<p>Plate: {{ Bus.plate_nr }}</p>
+			<p>Capacity: {{ Bus.people_capacity }}</p>
+			<p>Price/km: {{ Bus.price_per_km }}</p>
+			<p>Description: {{ Bus.description }}</p>
+			<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
+			<p></p>
+			
 
-        <div>
-            
-            <h2><a href="">Przykładowy teks 1</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div>
-
-        <div>
-            <h2><a href="">pzykladowy tekst 2</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
-        </div>
+		    </div>
+		{% endfor %} 
     </body>
 </html>
