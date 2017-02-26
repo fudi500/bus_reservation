@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def panel(request):
+    return render(request, 'busreserv/panel.html', {})
