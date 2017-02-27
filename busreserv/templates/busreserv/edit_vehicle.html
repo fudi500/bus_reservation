@@ -2,7 +2,19 @@
 
 {% block content %}
     <div class="bus">
-     <p>Pojazd 1</p>
-	
+				<h2>Model: {{ vehicle.brand }}</h2>
+				<p>Plate: {{ vehicle.plate_nr }}</p>
+				<p>Capacity: {{ vehicle.people_capacity }}</p>
+				<p>Price/km: {{ vehicle.price_per_km }}</p>
+				<p>Description: {{ vehicle.description }}</p>
+				<p>Available for cutomers: {{vehicle.available_for_cutomers}}</p>
+				<p>
+				<a class="btn btn-default" href="{% url 'edit_vehicle' pk=vehicle.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>	
+				<h1>Nev vehicle</h1>
+
+				<form method="POST">{% csrf_token %}
+        			{{ form.as_p }}
+        			<button type="submit" >Save</button>
+    				</form>   
     </div>
 {% endblock %}

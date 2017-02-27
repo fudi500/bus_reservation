@@ -12,9 +12,12 @@
 				<p>Plate: {{ Bus.plate_nr }}</p>
 				<p>Capacity: {{ Bus.people_capacity }}</p>
 				<p>Price/km: {{ Bus.price_per_km }}</p>
+				
 				<p>Description: {{ Bus.description }}</p>
 				<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
-				<p><a href="{% url 'edit_vehicle' pk=Bus.pk %}">Edytuj pojazd</a></p>
+				<a class="btn btn-default" href="{% url 'edit_vehicle' pk=Bus.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+				<p><a href="{% url 'edit_vehicle' pk=Bus.pk %}">Wyswietl pojazd</a></p>
 
 			    </div>
 		{% endfor %}

@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.panel, name='panel'),
     url(r'^vehicle/(?P<pk>[0-9]+)/$', views.edit_vehicle, name='edit_vehicle'),
+    url(r'^vehicle/new/$', views.edit_vehicle, name='edit_vehicle'),   
 ]
 
 

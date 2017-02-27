@@ -7,7 +7,7 @@ class Bus(models.Model): # Base model of Bus
     brand = models.CharField(max_length=150)
     plate_nr = models.CharField(max_length=10)
     people_capacity = models.IntegerField()
-    price_per_km = models.CharField(max_length=5)
+    price_per_km = models.DecimalField(max_digits=5, decimal_places=2)
     available_for_cutomers = models.BooleanField(default=True)
 
     def __str__(self):
