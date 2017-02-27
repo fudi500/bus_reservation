@@ -2,8 +2,10 @@
 
 
 {% block content %}
+		
 	
-	
+		<h2><a href="{% url 'new_vehicle_name' %}">Add new vehice</a></h2>
+
 		
 
 		{% for Bus in buses %}
@@ -15,9 +17,7 @@
 				
 				<p>Description: {{ Bus.description }}</p>
 				<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
-				<a class="btn btn-default" href="{% url 'edit_vehicle' pk=Bus.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-
-				<p><a href="{% url 'edit_vehicle' pk=Bus.pk %}">Wyswietl pojazd</a></p>
+		
 
 			    </div>
 		{% endfor %}

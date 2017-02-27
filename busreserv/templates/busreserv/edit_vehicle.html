@@ -9,12 +9,11 @@
 				<p>Description: {{ vehicle.description }}</p>
 				<p>Available for cutomers: {{vehicle.available_for_cutomers}}</p>
 				<p>
-				<a class="btn btn-default" href="{% url 'edit_vehicle' pk=vehicle.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>	
-				<h1>Nev vehicle</h1>
-
-				<form method="POST">{% csrf_token %}
-        			{{ form.as_p }}
-        			<button type="submit" >Save</button>
-    				</form>   
+				
+				<form action="/your-name/" method="post">
+    				<label for="your_name">Your name: </label>
+    				<input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    				<input type="submit" value="OK">
+				</form>  
     </div>
 {% endblock %}
