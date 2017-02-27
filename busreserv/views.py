@@ -32,3 +32,8 @@ def new_vehicle_view(request):
     return render(request, 'busreserv/new_vehicle.html', {'formBus': form_var})
 
 
+def delete_vehicle_view(request, pk):
+    vehicle = get_object_or_404(Bus, pk=pk)
+    vehicle.delete()
+    buses = Bus.objects.all()           #to previos site in broswer
+    return render(request, 'busreserv/panel.html', {'buses' : buses})

@@ -18,6 +18,7 @@
 				<p>Description: {{ Bus.description }}</p>
 				<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
 				<a href="{% url 'edit_vehicle' pk=Bus.pk %}"><button type="button" class="btn btn-primary btn-md">Edit</button> </a>
+				<a href="{% url 'delete_vehicle_name' pk=Bus.pk %}"><button type="button" class="btn btn-primary btn-md">Delete</button> </a>
 
 		
 
