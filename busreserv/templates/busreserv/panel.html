@@ -4,7 +4,7 @@
 {% block content %}
 		
 	
-		<h2><a href="{% url 'new_vehicle_name' %}">Add new vehice</a></h2>
+		<h2><a href="{% url 'new_vehicle_name' %}"><button type="button" class="btn btn-primary btn-lg">Add new vehice</button> </a></h2>
 
 		
 
@@ -17,6 +17,8 @@
 				
 				<p>Description: {{ Bus.description }}</p>
 				<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
+				<a href="{% url 'edit_vehicle' pk=Bus.pk %}"><button type="button" class="btn btn-primary btn-md">Edit</button> </a>
+
 		
 
 			    </div>
