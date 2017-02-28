@@ -11,8 +11,8 @@ def edit_vehicle_view(request, pk):
     if request.method == "POST":
         form_var = BusForm(request.POST, instance=vehicle)
         if form_var.is_valid():
-            newBus = form_var.save(commit=False)           
-            newBus.save()                               
+            newBus = form_var.save(commit=False)
+            newBus.save()
             buses = Bus.objects.all()           #to previos site in broswer
             return render(request, 'busreserv/panel.html', {'buses' : buses})
     else:
@@ -21,9 +21,9 @@ def edit_vehicle_view(request, pk):
 
 def new_vehicle_view(request):
     if request.method == "POST":
-        form_var = BusForm(request.POST)        
+        form_var = BusForm(request.POST)
         if form_var.is_valid():
-            newBus = form_var.save()            #create nawBus 
+            newBus = form_var.save()            #create nawBus
             newBus.save()                       #save to database
             buses = Bus.objects.all()           #to previos site in broswer
             return render(request, 'busreserv/panel.html', {'buses' : buses})
