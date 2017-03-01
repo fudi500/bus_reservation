@@ -4,7 +4,9 @@
 {% block content %}
 
 
-
+		{% if not buses %}
+		<h2>No avilable buses :(, try another time.)</h2>
+		{% endif %}
 
 
 		{% for Bus in buses %}
@@ -17,7 +19,7 @@
 				<p>Price/km: {{ Bus.price_per_km }}</p>
 
 				<p>Description: {{ Bus.description }}</p>
-			
+
 
 
 
