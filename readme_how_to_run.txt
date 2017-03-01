@@ -1,5 +1,6 @@
 // Instruction for linux system. (on Windows you need install python at the begining)
 
+You need to be on dictionery 'bus_reservation' where is file 'mange.py'
 
     $ cd bus_reservation
 
