@@ -2,8 +2,6 @@ from django.db import models
 from django.utils import timezone
 
 class Bus(models.Model): # Base model of Bus
-
-    #busID = models.AutoField(primary_key=True)
     description = models.CharField(max_length=200)
     brand = models.CharField(max_length=150)
     plate_nr = models.CharField(max_length=10)

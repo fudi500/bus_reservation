@@ -13,7 +13,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RemoveField(
             model_name='bus',
-            name='author',
+            name='bus',
+
         ),
         migrations.AlterField(
             model_name='bus',
