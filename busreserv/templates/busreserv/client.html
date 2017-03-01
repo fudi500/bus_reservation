@@ -1,0 +1,26 @@
+{% extends 'busreserv/base.html' %}
+
+
+{% block content %}
+
+
+
+
+
+		{% for Bus in buses %}
+
+
+                <div class="bus">
+				<h2>Model: {{ Bus.brand }}</h2>
+				<p>Plate: {{ Bus.plate_nr }}</p>
+				<p>Capacity: {{ Bus.people_capacity }}</p>
+				<p>Price/km: {{ Bus.price_per_km }}</p>
+
+				<p>Description: {{ Bus.description }}</p>
+			
+
+
+
+			    </div>
+		{% endfor %}
+{% endblock content %}

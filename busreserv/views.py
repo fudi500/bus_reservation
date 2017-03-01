@@ -37,3 +37,7 @@ def delete_vehicle_view(request, pk):
     vehicle.delete()
     buses = Bus.objects.all()           #to previos site in broswer
     return render(request, 'busreserv/panel.html', {'buses' : buses})
+
+def client_panel_view(request):
+    buses = Bus.objects.filter(available_for_cutomers=True)
+    return render(request, 'busreserv/client.html', {'buses' : buses})
