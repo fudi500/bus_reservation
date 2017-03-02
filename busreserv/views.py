@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Bus , Client, Reservation
 from .forms import BusForm, ClientForm, ReservationForm
 from django.utils import timezone
+from django.contrib import messages
 
 
 
@@ -48,27 +49,23 @@ def client_panel_view(request):
 def reservation_view(request, pk):
     bus = get_object_or_404(Bus, pk=pk)
 
-    form_client = ClientForm()
+    form_client = ClientForm(prefix='cl')
+    form_var = ReservationForm(prefix='res')
 
     if request.method == "POST":
-        newClient = Client()
-        newreservation = Reservation()
-        form_client = ClientForm(request.POST)
-        form_var = ReservationForm(request.POST,instance=newreservation)
-        if form_var.is_valid() and form_client.is_valid():
-            newClient = form_client.save()            #create nawBus
-            newClient.save()
 
+        form_client = ClientForm(request.POST,prefix='cl')
+        form_var = ReservationForm(request.POST,prefix='res')
+
+        if form_var.is_valid() and form_client.is_valid():
+            newreservation = form_var.save(commit=False)
             newreservation.reBusID = bus
-            newreservation.reClientID = newClient
-            newreservation = form_var.save()
+            newreservation.reClientID = form_client.save()       #can be changed i future if the same client
             newreservation.reDate = timezone.now()
             newreservation.save()
-
-
-
-            buses = Bus.objects.filter(available_for_cutomers=True)
-            return render(request, 'busreserv/client.html', {'buses' : buses})
+        buses = Bus.objects.filter(available_for_cutomers=True)
+        return render(request, 'busreserv/client.html', {'buses' : buses})
     else:
         form_var = ReservationForm()
+        form_client = ClientForm()
         return render(request, 'busreserv/newreservation.html', {'formReservation' : form_var, 'bus':bus , 'form_client':form_client})

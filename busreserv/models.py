@@ -3,7 +3,6 @@ from django.utils import timezone
 
 class Bus(models.Model): # Base model of Bus
 
-    #busID = models.AutoField(primary_key=True)
     description = models.CharField(max_length=200)
     brand = models.CharField(max_length=150)
     plate_nr = models.CharField(max_length=10)
@@ -16,7 +15,6 @@ class Bus(models.Model): # Base model of Bus
 
 
 class Client(models.Model):
-    #clientID = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=15)
     lastName = models.CharField(max_length=15)
     clientEmail = models.CharField(max_length=15)
@@ -28,9 +26,9 @@ class Client(models.Model):
 
 
 class Reservation(models.Model):
-    reBusID = models.ForeignKey( 'Bus')
-    reClientID = models.ForeignKey( 'Client')
-    reDate = models.DateTimeField(blank=True, null=True)
+    reBusID = models.ForeignKey( 'Bus',blank=True, null=True)
+    reClientID = models.ForeignKey( 'Client',blank=True, null=True)
+    reDate = models.DateTimeField(blank=True, null=True) #not used yet
     km = models.IntegerField()
     details = models.CharField(max_length=200)
 

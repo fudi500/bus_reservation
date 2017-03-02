@@ -1,0 +1,31 @@
+{% extends 'busreserv/base.html' %}
+
+{% block content %}
+
+                <h2>Order</h2>
+
+                <p>Date: {{Reservation.reDate}}</p>
+                <p>Price/km: {{ Bus.price_per_km }}</p>
+                <p>Length: {{ Reservation.km }} km</p>
+                <h1>Cost: {{ price }} PLN</h1>
+
+
+
+				<p>Model: {{ Bus.brand }}</p>
+				<p>Plate: {{ Bus.plate_nr }}</p>
+				<p>Capacity: {{ Bus.people_capacity }}</p>
+				<p>Description: {{ Bus.description }}</p>
+
+
+
+                <h3>You: {{ Client.firstName }} {{ Client.lastName }}</h3>
+                <p>Your email: {{ Client.clientEmail }} PLN</p>
+                <p>Your Phone: {{ Client.clientPhone }} PLN</p>
+
+
+
+
+
+			    </div>
+
+{% endblock content %}

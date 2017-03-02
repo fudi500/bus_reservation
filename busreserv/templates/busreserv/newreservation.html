@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<script>
+{% if messages %}
+    {% for message in messages %}
+        alert(message);
+    {% endfor %}
+{% endif %}
+</script>
+
     <h1>New reservation</h1>
     <div class="bus"
     <p>Model: {{ bus.brand }}</p>
