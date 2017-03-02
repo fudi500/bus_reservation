@@ -13,3 +13,26 @@ class Bus(models.Model): # Base model of Bus
 
     def __str__(self):
         return self.plate_nr
+
+
+class Client(models.Model):
+    #clientID = models.AutoField(primary_key=True)
+    firstName = models.CharField(max_length=15)
+    lastName = models.CharField(max_length=15)
+    clientEmail = models.CharField(max_length=15)
+    clientPhone = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.lastName
+
+
+
+class Reservation(models.Model):
+    reBusID = models.ForeignKey( 'Bus')
+    #reClientID = models.ForeignKey( 'Client')
+    reDate = models.DateTimeField(blank=True, null=True)
+    km = models.IntegerField()
+    details = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.id

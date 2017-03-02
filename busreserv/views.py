@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Bus
-from .forms import BusForm
+from .models import Bus , Client, Reservation
+from .forms import BusForm, ClientForm, ReservationForm
 
 def panel_view(request):
     buses = Bus.objects.all()
@@ -41,3 +41,17 @@ def delete_vehicle_view(request, pk):
 def client_panel_view(request):
     buses = Bus.objects.filter(available_for_cutomers=True)
     return render(request, 'busreserv/client.html', {'buses' : buses})
+
+def reservation_view(request, pk):
+    bus = get_object_or_404(Bus, pk=pk)
+    if request.method == "POST":
+        form_var = ReservationForm(request.POST)
+        if form_var.is_valid():
+            newreservation = form_var.save()
+            newreservation.reBusID = bus
+            newreservation.save()
+            buses = Bus.objects.filter(available_for_cutomers=True)
+            return render(request, 'busreserv/client.html', {'buses' : buses})
+    else:
+        form_var = ReservationForm()
+        return render(request, 'busreserv/newreservation.html', {'formReservation' : form_var})
