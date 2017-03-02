@@ -19,4 +19,4 @@ class ReservationForm(forms.ModelForm):
 
     class Meta:
         model = Reservation
-        fields = ('reDate', 'km','details')
+        fields = ( 'km','details')
