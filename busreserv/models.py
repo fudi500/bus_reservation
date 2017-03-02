@@ -29,7 +29,7 @@ class Client(models.Model):
 
 class Reservation(models.Model):
     reBusID = models.ForeignKey( 'Bus')
-    #reClientID = models.ForeignKey( 'Client')
+    reClientID = models.ForeignKey( 'Client')
     reDate = models.DateTimeField(blank=True, null=True)
     km = models.IntegerField()
     details = models.CharField(max_length=200)

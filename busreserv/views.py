@@ -60,6 +60,7 @@ def reservation_view(request, pk):
             newClient.save()
 
             newreservation.reBusID = bus
+            newreservation.reClientID = newClient
             newreservation = form_var.save()
             newreservation.reDate = timezone.now()
             newreservation.save()
