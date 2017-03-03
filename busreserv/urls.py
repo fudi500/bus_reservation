@@ -9,5 +9,5 @@ urlpatterns = [
     url('^panel/(?P<pk>\d+)/delete/$', views.delete_vehicle_view, name='delete_vehicle_name'),
 
     url(r'^newreservation/(?P<pk>[0-9]+)/$', views.reservation_view, name='newreservation_name'),
-    #url(r'^newreservation/details(?P<pk>[0-9]+)/$', views.reservation_view, name='details'),
+    url(r'^newreservation/details(?P<pk>[0-9]+)/$', views.reservation_view, name='details'),
 ]

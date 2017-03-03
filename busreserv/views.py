@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Bus , Client, Reservation
-from .forms import BusForm, ClientForm, ReservationForm
+from .models import Bus , Reservation
+from .forms import BusForm, ReservationForm
 from django.utils import timezone
 from django.contrib import messages
+from datetime import datetime
+from django.http import HttpResponseRedirect
 
 
 
@@ -49,23 +51,28 @@ def client_panel_view(request):
 def reservation_view(request, pk):
     bus = get_object_or_404(Bus, pk=pk)
 
-    form_client = ClientForm(prefix='cl')
-    form_var = ReservationForm(prefix='res')
-
+    newreservation = Reservation()
+    newreservation.reBusID = bus
     if request.method == "POST":
 
-        form_client = ClientForm(request.POST,prefix='cl')
-        form_var = ReservationForm(request.POST,prefix='res')
+        form_var = ReservationForm(request.POST,instance=newreservation,initial={'reDate': datetime.now()})
+        date = request.POST.get('reDate')
+#        if True:
+#            return HttpResponseRedirect('/This date is reserved for this bus, enter another dateor another bus./')
 
-        if form_var.is_valid() and form_client.is_valid():
+        if form_var.is_valid():
             newreservation = form_var.save(commit=False)
-            newreservation.reBusID = bus
-            newreservation.reClientID = form_client.save()       #can be changed i future if the same client
-            newreservation.reDate = timezone.now()
+
+            #newreservation.reDate = timezone.now()
             newreservation.save()
-        buses = Bus.objects.filter(available_for_cutomers=True)
-        return render(request, 'busreserv/client.html', {'buses' : buses})
+
+            price = bus.price_per_km * newreservation.km
+
+            return render(request, 'busreserv/details.html', {
+                'Bus' : bus,
+                'Reservation' : newreservation,
+                'price' : price
+            })
     else:
         form_var = ReservationForm()
-        form_client = ClientForm()
-        return render(request, 'busreserv/newreservation.html', {'formReservation' : form_var, 'bus':bus , 'form_client':form_client})
+    return render(request, 'busreserv/newreservation.html', {'formReservation' : form_var, 'bus':bus})

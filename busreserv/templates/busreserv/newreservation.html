@@ -21,8 +21,9 @@
 
     <form method="POST" class="post-form">{% csrf_token %}
 
-        {{ form_client.as_p }}
+
         {{ formReservation.as_p }}
+
         <button type="submit" class="btn btn-primary btn-md">Book it</button>
     </form>
 

@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MaxValueValidator, MinValueValidator
+import datetime
+
 
 class Bus(models.Model): # Base model of Bus
 
@@ -14,22 +17,18 @@ class Bus(models.Model): # Base model of Bus
         return self.plate_nr
 
 
-class Client(models.Model):
-    firstName = models.CharField(max_length=15)
-    lastName = models.CharField(max_length=15)
-    clientEmail = models.CharField(max_length=15)
-    clientPhone = models.CharField(max_length=15)
-
-    def __str__(self):
-        return self.lastName
-
 
 
 class Reservation(models.Model):
-    reBusID = models.ForeignKey( 'Bus',blank=True, null=True)
-    reClientID = models.ForeignKey( 'Client',blank=True, null=True)
-    reDate = models.DateTimeField(blank=True, null=True) #not used yet
-    km = models.IntegerField()
+    reBusID = models.ForeignKey( 'Bus')
+    clientName = models.CharField(max_length=30)
+    clientEmail = models.EmailField()
+    clientPhone = models.CharField(max_length=15)
+
+    reDate = models.DateField()
+    km = models.IntegerField(validators=[
+            MinValueValidator(0)
+        ])
     details = models.CharField(max_length=200)
 
     def __str__(self):
