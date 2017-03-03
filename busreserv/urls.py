@@ -10,4 +10,8 @@ urlpatterns = [
 
     url(r'^newreservation/(?P<pk>[0-9]+)/$', views.reservation_view, name='newreservation_name'),
     url(r'^newreservation/details(?P<pk>[0-9]+)/$', views.reservation_view, name='details'),
+
+    url(r'^panel/driver/$', views.new_driver_view, name='driver'),
+    url(r'^panel/edit_driver/(?P<pk>[0-9]+)/$', views.edit_driver_view, name='edit_driver'),
+    url(r'^panel/driver/deletedriver/(?P<pk>[0-9]+)/$', views.delete_driver_view, name='delete_driver'),
 ]

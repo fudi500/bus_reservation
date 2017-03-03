@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Bus , Driver, Reservation
-from .forms import BusForm, ReservationForm
+from .forms import BusForm,DriverForm, ReservationForm
 from django.utils import timezone
 from django.contrib import messages
-from datetime import datetime
+from datetime import datetime, date
 from django.http import HttpResponseRedirect
 
 
@@ -11,7 +11,45 @@ from django.http import HttpResponseRedirect
 def panel_view(request):
     buses = Bus.objects.all()
     drivers = Driver.objects.all()
-    return render(request, 'busreserv/panel.html', {'buses' : buses, 'drivers':drivers})
+    res = Reservation.objects.all()
+    resfuture = []      # list of reservation in future
+    for item in res:
+        if item.reDate >= date.today():  #if is in the furure
+            resfuture.append(item)
+
+
+    #return render(request, 'busreserv/new_vehicle.html', {'formBus': form_var})
+    return render(request, 'busreserv/panel.html', {
+        'buses' : buses,
+        'drivers':drivers,
+        'res': resfuture,
+    })
+
+def new_driver_view(request):
+    if request.method == "POST":
+        driverForm = DriverForm(request.POST)
+        if driverForm.is_valid():
+            newDriver = driverForm.save()
+            return HttpResponseRedirect("/panel")
+    else:
+        driverForm = DriverForm()
+    return render(request, 'busreserv/driver.html', {'driverForm':driverForm})
+
+def edit_driver_view(request, pk):
+    driver = get_object_or_404(Driver, pk=pk)
+    if request.method == "POST":
+        driverForm = DriverForm(request.POST, instance=driver)
+        if driverForm.is_valid():
+            newDriver = driverForm.save()
+            return HttpResponseRedirect("/panel")
+    else:
+        driverForm = DriverForm(instance=driver)
+    return render(request, 'busreserv/driver.html', {'driverForm':driverForm})
+
+def delete_driver_view(request, pk):
+    vehicle = get_object_or_404(Bus, pk=pk)
+    vehicle.delete()
+    return HttpResponseRedirect("/panel")
 
 def edit_vehicle_view(request, pk):
     vehicle = get_object_or_404(Bus, pk=pk)

@@ -11,6 +11,7 @@ class Bus(models.Model): # Base model of Bus
     people_capacity = models.IntegerField()
     price_per_km = models.DecimalField(max_digits=5, decimal_places=2)
     available_for_cutomers = models.BooleanField(default=True)
+    currentDriver = models.ForeignKey('Driver',blank=True, null=True)
 
     def __str__(self):
         return self.plate_nr

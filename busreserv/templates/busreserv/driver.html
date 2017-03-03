@@ -1,0 +1,10 @@
+{% extends 'busreserv/base.html' %}
+
+{% block content %}
+
+    <h1>Driver</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ driverForm.as_p }}
+        <button type="submit" class="btn btn-primary btn-md">Save</button>
+    </form>
+{% endblock %}

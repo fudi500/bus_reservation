@@ -1,7 +1,7 @@
 from django import forms
 from datetime import datetime, date, timedelta
 from django.utils import timezone
-from .models import Bus, Reservation
+from .models import Bus,Driver,  Reservation
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -9,7 +9,14 @@ class BusForm(forms.ModelForm):
 
     class Meta:
         model = Bus
-        fields = ('brand', 'plate_nr','people_capacity','price_per_km','description','available_for_cutomers')
+        fields = ('brand', 'plate_nr','people_capacity','price_per_km','description','available_for_cutomers','currentDriver')
+
+class DriverForm(forms.ModelForm):
+
+    class Meta:
+        model = Driver
+        fields = ('driverName','driverPhone')
+
 
 
 
