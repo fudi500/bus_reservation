@@ -1,27 +1,39 @@
 {% extends 'busreserv/base.html' %}
-
-
 {% block content %}
-		
-	
-		<h2><a href="{% url 'new_vehicle_name' %}"><button type="button" class="btn btn-primary btn-lg">Add new vehicle</button> </a></h2>
 
-		
 
-		{% for Bus in buses %}
-			    <div class="bus">
-				<h2>Model: {{ Bus.brand }}</h2>
-				<p>Plate: {{ Bus.plate_nr }}</p>
-				<p>Capacity: {{ Bus.people_capacity }}</p>
-				<p>Price/km: {{ Bus.price_per_km }}</p>
-				
-				<p>Description: {{ Bus.description }}</p>
-				<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
-				<a href="{% url 'edit_vehicle' pk=Bus.pk %}"><button type="button" class="btn btn-primary btn-md">Edit</button> </a>
-				<a href="{% url 'delete_vehicle_name' pk=Bus.pk %}"><button type="button" class="btn btn-primary btn-md">Delete</button> </a>
+<h2><a href="{% url 'new_vehicle_name' %}">
+	<button type="button" class="btn btn-primary btn-lg">Add new vehicle</button>
+</a></h2>
 
-		
+	{% for Bus in buses %}
+	<div class="bus">
+		<h2>Model: {{ Bus.brand }}</h2>
+		<p>Plate: {{ Bus.plate_nr }}</p>
+		<p>Capacity: {{ Bus.people_capacity }}</p>
+		<p>Price/km: {{ Bus.price_per_km }}</p>
 
-			    </div>
-		{% endfor %}
+		<p>Description: {{ Bus.description }}</p>
+		<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
+		<a href="{% url 'edit_vehicle' pk=Bus.pk %}"><button type="button" class="btn btn-primary btn-md">Edit</button> </a>
+		<a href="{% url 'delete_vehicle_name' pk=Bus.pk %}"><button type="button" class="btn btn-primary btn-md">Delete</button> </a>
+
+	</div>
+	{% endfor %}
+
+	{% load static %}
+	<div class="driverList">
+		<h2>Lista Kierowcow</h2>
+		<table class="foobar" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>Name</td>	<td>Phone</td>
+			</tr>
+			{%for item in drivers%}
+				<tr>
+					<td>{{item.driverName}}</td><td>{{item.driverPhone}}</td>
+				</tr>
+			{% endfor %}
+	 	</table>
+	</div>
+
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Bus , Reservation
+from .models import Bus , Driver, Reservation
 from .forms import BusForm, ReservationForm
 from django.utils import timezone
 from django.contrib import messages
@@ -10,7 +10,8 @@ from django.http import HttpResponseRedirect
 
 def panel_view(request):
     buses = Bus.objects.all()
-    return render(request, 'busreserv/panel.html', {'buses' : buses})
+    drivers = Driver.objects.all()
+    return render(request, 'busreserv/panel.html', {'buses' : buses, 'drivers':drivers})
 
 def edit_vehicle_view(request, pk):
     vehicle = get_object_or_404(Bus, pk=pk)

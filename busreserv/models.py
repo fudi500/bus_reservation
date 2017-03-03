@@ -5,7 +5,6 @@ import datetime
 
 
 class Bus(models.Model): # Base model of Bus
-
     description = models.CharField(max_length=200)
     brand = models.CharField(max_length=150)
     plate_nr = models.CharField(max_length=10)
@@ -17,7 +16,12 @@ class Bus(models.Model): # Base model of Bus
         return self.plate_nr
 
 
+class Driver(models.Model):
+    driverName = models.CharField(max_length=30)
+    driverPhone = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.driverName
 
 class Reservation(models.Model):
     reBusID = models.ForeignKey( 'Bus')
@@ -25,7 +29,7 @@ class Reservation(models.Model):
     clientEmail = models.EmailField()
     clientPhone = models.CharField(max_length=15)
 
-    reDate = models.DateField()
+    reDate = models.DateField(help_text='Date of reservation')
     km = models.IntegerField(validators=[
             MinValueValidator(0)
         ])
