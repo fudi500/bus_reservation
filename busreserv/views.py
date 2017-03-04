@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.contrib import messages
 from datetime import datetime, date
 from django.http import HttpResponseRedirect
-
+import datetime
 
 
 def panel_view(request):
@@ -14,7 +14,8 @@ def panel_view(request):
     res = Reservation.objects.all()
     resfuture = []      # list of reservation in future
     for item in res:
-        if item.reDate >= date.today():  #if is in the furure
+        #if is in the furure
+        if item.reDate >= date.today():
             resfuture.append(item)
 
 
@@ -22,6 +23,7 @@ def panel_view(request):
         'buses' : buses,
         'drivers':drivers,
         'res': resfuture,
+
     })
 
 def new_driver_view(request):
@@ -93,7 +95,7 @@ def reservation_view(request, pk):
     newreservation.reBusID = bus
     if request.method == "POST":
 
-        form_var = ReservationForm(request.POST,instance=newreservation,initial={'reDate': datetime.now()})
+        form_var = ReservationForm(request.POST,instance=newreservation,initial={'reDate': datetime.datetime.now()})
         date = request.POST.get('reDate')
 #        if True:
 #            return HttpResponseRedirect('/This date is reserved for this bus, enter another dateor another bus./')
@@ -104,6 +106,7 @@ def reservation_view(request, pk):
                 newreservation.EndDate = request.POST.get('reDate') # if EndDate is none: EndDate = reDate
             else:
                 newreservation.EndDate = request.POST.get('EndDate')
+
             newreservation.save()
 
             price = bus.price_per_km * newreservation.km

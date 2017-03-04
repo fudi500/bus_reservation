@@ -40,6 +40,7 @@ class ReservationForm(forms.ModelForm):
     clientEmail = forms.EmailField(label="Your email")
     clientPhone = forms.CharField(label="Your phone number")
     tempReDate = datetime.date(1,1,1) # temp local variable
+        #numOfDays = forms.IntegerField()
     #reDate = forms.DateField(label='Date of reservation yyyy-mm-dd', initial=timezone.now())   #date to show in form
 
     def clean_reDate(self):
@@ -64,6 +65,7 @@ class ReservationForm(forms.ModelForm):
 
     def clean_EndDate(self):
         if not self.data['EndDate']:            #check if EndDate is empty
+            self.instance.numOfDays =  1  #set numbers days of reservation 1 if no end date
             return None
         # if start date is empty
         if self.tempReDate == datetime.date(1,1,1):
@@ -85,6 +87,9 @@ class ReservationForm(forms.ModelForm):
                     if reDate <= item.reDate and item.reDate <= EndDate or reDate <= item.EndDate and item.EndDate <= EndDate:
                         #jesli w przedziale nowego zamowienia jest poczatek albo koniec innego to zajęte
                        raise forms.ValidationError("This date is reserved for this bus, type another date or choose another bus.")
+        # calculateing number  days of reservation
+        var = EndDate - reDate
+        self.instance.numOfDays = var.days + 1
         return reDate
 
 

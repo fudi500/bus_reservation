@@ -32,6 +32,7 @@ class Reservation(models.Model):
 
     reDate = models.DateField(help_text='Date of reservation')
     EndDate = models.DateField(blank=True, null=True)
+    numOfDays = models.IntegerField(blank=True, null=True)
     km = models.IntegerField(validators=[
             MinValueValidator(0)
         ])
