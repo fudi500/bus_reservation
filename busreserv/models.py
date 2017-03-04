@@ -31,6 +31,7 @@ class Reservation(models.Model):
     clientPhone = models.CharField(max_length=15)
 
     reDate = models.DateField(help_text='Date of reservation')
+    EndDate = models.DateField(blank=True, null=True)
     km = models.IntegerField(validators=[
             MinValueValidator(0)
         ])

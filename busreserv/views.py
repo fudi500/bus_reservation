@@ -18,7 +18,6 @@ def panel_view(request):
             resfuture.append(item)
 
 
-    #return render(request, 'busreserv/new_vehicle.html', {'formBus': form_var})
     return render(request, 'busreserv/panel.html', {
         'buses' : buses,
         'drivers':drivers,
@@ -101,8 +100,10 @@ def reservation_view(request, pk):
 
         if form_var.is_valid():
             newreservation = form_var.save(commit=False)
-
-            #newreservation.reDate = timezone.now()
+            if not request.POST.get('EndDate'):
+                newreservation.EndDate = request.POST.get('reDate') # if EndDate is none: EndDate = reDate
+            else:
+                newreservation.EndDate = request.POST.get('EndDate')
             newreservation.save()
 
             price = bus.price_per_km * newreservation.km
