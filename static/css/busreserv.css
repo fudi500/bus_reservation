@@ -10,6 +10,41 @@
     text-decoration: none;
 }
 
+#stopka {
+width: 100%;
+position: fixed;
+height: 40px;
+background: #ff9400;
+bottom: 0;
+font-size: 12px;
+text-align: center;
+padding: 10px 20px 20px 20px
+}
+
+#stopka p, #stopka p a, .stopka h2 a:visited, .stopka h2 a:active {
+    color: #ffffff;
+    font-size: 12pt;
+    text-decoration: none;
+}
+
+#caly{
+    width: 100%; /* minimalna długość środka */
+}
+
+#lewy {
+    width: 50%;
+    float: left;
+
+}
+
+#prawy {
+    width: 50%;
+    float: left;
+    margin-left: 20px;
+}
+
+#listaki
+
 .content {
     margin-left: 40px;
 }
@@ -48,14 +83,14 @@ h1, h2, h3, h4 {
 
 
 table.foobar {
-      border: solid black 1px;
+      border: solid grey 1px;
       border-spacing: 10px;
   }
 table.foobar td {
-      border: solid black 1px;
+      border: solid grey 1px;
   }
 
 .driverList {
     font-size: 30px;
+    padding: 5px 50px 5px 5px;
 }
- 
