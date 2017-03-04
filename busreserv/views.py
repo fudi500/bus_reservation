@@ -7,23 +7,23 @@ from datetime import datetime, date
 from django.http import HttpResponseRedirect
 import datetime
 
-
+# main admin panel for owner
 def panel_view(request):
     buses = Bus.objects.all()
     drivers = Driver.objects.all()
     res = Reservation.objects.all()
-    resfuture = []      # list of reservation in future
+
+    # colect list of reservation in future
+    resfuture = []
     for item in res:
         #if is in the furure
         if item.reDate >= date.today():
             resfuture.append(item)
 
-
     return render(request, 'busreserv/panel.html', {
         'buses' : buses,
         'drivers':drivers,
         'res': resfuture,
-
     })
 
 def new_driver_view(request):
