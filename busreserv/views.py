@@ -9,7 +9,7 @@ import datetime
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.template import loader
-
+from smsapi.client import SmsAPI
 
 
 # main admin panel for owner
@@ -158,6 +158,34 @@ def reservation_details_view(request, pk, bus):
         html_message=html_message
     )
     #-------------------------
+
+    #------S M S  to the driver-------------
+
+    kierowca = Driver()
+    kierowca = Driver.objects.get(id=bus.currentDriver.id)
+
+    #jeśli kierowca istnieje (jest przypisany do autobusu bo nie jest to wymagane)
+    if kierowca:
+        #jesli wyjazd jednodniowy
+        if res.reDate == res.EndDate:
+            wiadomosc = 'Witaj '+ kierowca.driverName + '. Rezerwacja ' + bus.plate_nr +" Data: "+ str(res.reDate)
+        else:
+            wiadomosc = 'Witaj '+ kierowca.driverName + '. Rezerwacja ' + bus.plate_nr +" od "+ str(res.reDate) + " do " + str(res.EndDate)
+
+        api = SmsAPI()
+
+        api.set_username('busreservation500@gmail.com')
+        api.set_password('sidneypolak123')
+
+        api.service('sms').action('send')
+
+        api.set_content(wiadomosc)
+        api.set_to(kierowca.driverPhone)
+
+        result = api.execute()
+
+    #-------------------------
+
     return render(request, 'busreserv/details.html', {
         'Bus' : bus,
         'Reservation' : res,
