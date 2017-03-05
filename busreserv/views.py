@@ -6,6 +6,11 @@ from django.contrib import messages
 from datetime import datetime, date
 from django.http import HttpResponseRedirect
 import datetime
+from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
+from django.template import loader
+
+
 
 # main admin panel for owner
 def panel_view(request):
@@ -104,7 +109,6 @@ def client_panel_view(request):
 
 def reservation_view(request, pk):
     bus = get_object_or_404(Bus, pk=pk)
-
     newreservation = Reservation()
     newreservation.reBusID = bus
     if request.method == "POST":
@@ -117,13 +121,45 @@ def reservation_view(request, pk):
             else:
                 newreservation.EndDate = request.POST.get('EndDate')
             newreservation.save()
-            price = bus.price_per_km * newreservation.km
 
-            return render(request, 'busreserv/details.html', {
-                'Bus' : bus,
-                'Reservation' : newreservation,
-                'price' : price
-            })
+            return HttpResponseRedirect(reverse("reservation_details",
+                                                kwargs={'pk':   newreservation.id, 'bus': bus.id}
+            ))
+
     else:
         form_var = ReservationForm()
     return render(request, 'busreserv/newreservation.html', {'formReservation' : form_var, 'bus':bus})
+
+
+def reservation_details_view(request, pk, bus):
+    res = get_object_or_404(Reservation, pk=pk)
+    bus = get_object_or_404(Bus, pk=bus)
+
+    price = res.km * bus.price_per_km
+
+    #----sending Email-------------
+    subject1 =  str(res.reDate) + ' Bus reservation '
+    message1 = ' '#, res.reDate , " to " , res.EndDate
+    html_message = loader.render_to_string(
+            'busreserv/message.html',
+            {
+                'Bus' : bus,
+                'Reservation' : res,
+                'price' : price
+            }
+        )
+
+    send_mail(
+        subject1,
+        html_message,
+        'busreservation500@gmail.com',
+        [res.clientEmail],
+        fail_silently=True,
+        html_message=html_message
+    )
+    #-------------------------
+    return render(request, 'busreserv/details.html', {
+        'Bus' : bus,
+        'Reservation' : res,
+        'price' : price
+    })
