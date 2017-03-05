@@ -138,6 +138,7 @@ def reservation_details_view(request, pk, bus):
     price = res.km * bus.price_per_km
 
     #----sending Email-------------
+    """
     subject1 =  str(res.reDate) + ' Bus reservation '
     message1 = ' '#, res.reDate , " to " , res.EndDate
     html_message = loader.render_to_string(
@@ -157,6 +158,7 @@ def reservation_details_view(request, pk, bus):
         fail_silently=True,
         html_message=html_message
     )
+    """
     #-------------------------
 
     #------S M S  to the driver-------------
