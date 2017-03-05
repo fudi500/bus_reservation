@@ -160,7 +160,7 @@ def reservation_details_view(request, pk, bus):
     #-------------------------
 
     #------S M S  to the driver-------------
-
+    """
     kierowca = Driver()
     kierowca = Driver.objects.get(id=bus.currentDriver.id)
 
@@ -183,7 +183,7 @@ def reservation_details_view(request, pk, bus):
         api.set_to(kierowca.driverPhone)
 
         result = api.execute()
-
+    """
     #-------------------------
 
     return render(request, 'busreserv/details.html', {
