@@ -2,27 +2,46 @@
 
 {% block content %}
 
-    <h3>Thank you {{ Reservation.clientName }} for using our services,</h3>
+<div class="row">
+  <div class="col-xs-3 col-md-3"></div>
+  <div class="col-xs-6 col-md-6">
 
-    <p>we sent you the email with this information on {{ Reservation.clientEmail }}</p>
-    <p>You reserved bus from  {{Reservation.reDate}} to  {{Reservation.EndDate}} , it's  {{Reservation.numOfDays}} day/s</p>
-    <p>details: {{ Reservation.details }}</p>
-    <p>Price/km: {{ Bus.price_per_km }}</p>
-    <p>Length: {{ Reservation.km }} km</p>
+      <div class="col-lg-12">
+          <h3 class="page-header" >Thank you {{ Reservation.clientName }} for using our services</h3>
+      </div>
 
-    <h3>Bus</h3>
-    <p>model: {{ Bus.brand }}</p>
-    <p>Plate: {{ Bus.plate_nr }}</p>
-    <p>Capacity: {{ Bus.people_capacity }}</p>
-    <p>Description: {{ Bus.description }}</p>
+          <p>We sent you the email with this information on {{ Reservation.clientEmail }}</p>
+          <p>You reserved bus from  {{Reservation.reDate}} to  {{Reservation.EndDate}} , it's  {{Reservation.numOfDays}} day/s</p>
+          <ul>
+              <li>details: {{ Reservation.details }}</li>
+              <li>Price/km: {{ Bus.price_per_km }}</li>
+              <li>Length: {{ Reservation.km }} km</li>
 
-    <p>Your Phone: {{ Reservation.clientPhone }} </p>
+          </ul>
 
-    <h3>Cost: {{ price }} PLN</h3>
-    <p>Best regards</p>
-    <p>JanuszTrans</p>
 
-    <p align="right"><a href="/"><button type="button" class="btn btn-primary btn-md">Back to main page</button></a></p>
+          <h3>Bus</h3>
+          <ul>
+              <li>model: {{ Bus.brand }}</li>
+              <li>Plate: {{ Bus.plate_nr }}</li>
+              <li>Capacity: {{ Bus.people_capacity }}</li>
+              <li>Description: {{ Bus.description }}</li>
+          </ul>
+
+
+          <p>Your Phone: {{ Reservation.clientPhone }} </p>
+
+          <h3>Cost: {{ price }} PLN</h3>
+          <p>Best regards</p>
+          <p>JanuszTrans</p>
+
+          <p align="right"><a href="/"><button type="button" class="btn btn-default btn-md">Back to main page</button></a></p>
+
+  </div>
+  <div class="col-xs-3 col-md-3"></div>
+</div>
+
+
 
 
 {% endblock content %}

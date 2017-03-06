@@ -1,0 +1,20 @@
+{% extends 'busreserv/base.html' %}
+
+{% block content %}
+    <div class="bus">
+        <h1>New reservation</h1>
+
+        <p>Model: {{ bus.brand }}</p>
+        <p>Plate: {{ bus.plate_nr }}</p>
+        <p>Capacity: {{ bus.people_capacity }}</p>
+        <p>Price/km: {{ bus.price_per_km }}</p>
+
+        <p>Description: {{ bus.description }}</p>
+
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ formReservation.as_p }}
+            <button type="submit" class="btn btn-primary btn-md">Book it</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'busreserv/base.html' %}
+
+{% block content %}
+    <div class="bus">
+		<h2>Model: {{ vehicle.brand }}</h2>
+		<p>Plate: {{ vehicle.plate_nr }}</p>
+		<p>Capacity: {{ vehicle.people_capacity }}</p>
+		<p>Price/km: {{ vehicle.price_per_km }}</p>
+		<p>Description: {{ vehicle.description }}</p>
+		<p>Available for cutomers: {{vehicle.available_for_cutomers}}</p>
+		<p>
+
+		<form action="/your-name/" method="post">
+
+			<label for="your_name">Your name: </label>
+			<input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+
+		<input type="submit" value="OK">
+		</form>
+    </div>
+
+    {% endblock %}

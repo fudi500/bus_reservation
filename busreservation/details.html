@@ -1,0 +1,28 @@
+{% extends 'busreserv/base.html' %}
+
+{% block content %}
+
+    <h3>Thank you {{ Reservation.clientName }} for using our services,</h3>
+
+    <p>we sent you the email with this information on {{ Reservation.clientEmail }}</p>
+    <p>You reserved bus from  {{Reservation.reDate}} to  {{Reservation.EndDate}} , it's  {{Reservation.numOfDays}} day/s</p>
+    <p>details: {{ Reservation.details }}</p>
+    <p>Price/km: {{ Bus.price_per_km }}</p>
+    <p>Length: {{ Reservation.km }} km</p>
+
+    <h3>Bus</h3>
+    <p>model: {{ Bus.brand }}</p>
+    <p>Plate: {{ Bus.plate_nr }}</p>
+    <p>Capacity: {{ Bus.people_capacity }}</p>
+    <p>Description: {{ Bus.description }}</p>
+
+    <p>Your Phone: {{ Reservation.clientPhone }} </p>
+
+    <h3>Cost: {{ price }} PLN</h3>
+    <p>Best regards</p>
+    <p>JanuszTrans</p>
+
+    <p align="right"><a href="/"><button type="button" class="btn btn-primary btn-md">Back to main page</button></a></p>
+
+
+{% endblock content %}

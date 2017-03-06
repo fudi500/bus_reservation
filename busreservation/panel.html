@@ -1,0 +1,110 @@
+{% extends 'busreserv/base.html' %}
+
+{% block content %}
+
+		<div class="col-lg-1"> </div>
+		<div class="col-lg-4">
+			<a class="btn btn-lg btn-default btn-block" href="{% url 'new_vehicle_name' %}">Add new vehicle</a>
+		</div>
+		<div class="col-lg-1"></div>
+		<div class="col-lg-4">
+			<a class="btn btn-lg btn-default btn-block" href="{% url 'driver' %}">Add new driver</a>
+		</div>
+
+
+		<div class="col-sm-12">
+			<h2>Drivers list</h2>
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+					<table class="listakierowcow">
+						<tr>
+							<td>Name</td>	<td>Phone</td><td></td>
+						</tr>
+						{%for item in drivers%}
+							<tr>
+								<td>{{item.driverName}}</td><td>{{item.driverPhone}}</td>
+								<td><a class="btn btn-md btn-default btn-block" href="{% url 'edit_driver' pk=item.pk %}">Edit</a></td>
+								<td><a class="btn btn-md btn-default btn-block" href="{% url 'delete_driver' pk=item.pk %}">Delete</a></td>
+
+							</tr>
+						{% endfor %}
+					</table>
+
+				</div>
+				<div class="col-md-4">
+				</div>
+
+			</div>
+
+
+
+
+
+		</div>
+
+		<div class="col-lg-12">
+			<h2 class="page-header">List of buses</h2>
+		</div>
+
+
+			{% for Bus in buses %}
+
+
+
+			<div class="col-md-5">
+				<div class="col-lg-12">
+					<h2 class="page-header">Model: {{ Bus.brand }}</h2>
+				</div>
+
+				<p><strong>Plate: {{ Bus.plate_nr }}</strong></p>
+				<ul>
+
+					<li>Capacity: {{ Bus.people_capacity }}</li>
+					<li>Price/km: {{ Bus.price_per_km }}</li>
+					<li>Current driver: {{Bus.currentDriver}}</li>
+					<li>Available for cutomers: {{Bus.available_for_cutomers}}</li>
+				</ul>
+				<p>Description: {{ Bus.description }}   </p>
+
+
+				</br>
+				<div class="row">
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-8">
+		                    <a class="btn btn-lg btn-default btn-block" href="{% url 'vehicle_details' pk=Bus.pk %}">Details</a>
+		            </div>
+					<div class="col-md-2">
+		            </div>
+
+				</div>
+
+			</div>
+			<div class="col-md-7">
+				<div>
+					<p>
+					<p>Reservation of this Bus</p>
+					<table class="rezerwacje">
+						<tr>
+							<td>Date</td><td>End date</td><td>Days</td><td>Client Name</td> <td>Client email</td> <td>Client Phone</td> <td>[km]</td> <td>Details</td>
+						</tr>
+							{%for r in res%}
+								{%if r.reBusID == Bus %}
+								<tr>
+									<td>{{r.reDate}}</td><td>{{r.EndDate}}</td><td>{{r.numOfDays}}</td><td>{{r.clientName}}</td> <td>{{r.clientEmail}}</td> <td>{{r.clientPhone}}</td> <td>{{r.km}}</td> <td>{{r.details}}</td>
+								</tr>
+								{% endif %}
+							{% endfor %}
+				 	</table>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<h2 class="page-header" > </h2>
+			</div>
+
+				{% endfor %}
+
+
+{% endblock content %}
