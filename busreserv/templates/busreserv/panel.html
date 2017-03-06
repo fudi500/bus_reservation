@@ -1,12 +1,11 @@
 {% extends 'busreserv/base.html' %}
+
 {% block content %}
-	<h2><a href="{% url 'new_vehicle_name' %}">
-		<button type="button" class="btn btn-primary btn-lg">Add new vehicle</button>
-	</a></h2>
-	<div id="caly">
-		<div id="lewy">
+	<div class="row">
+		<div class="col-sm-8">
+			<h2><a href="{% url 'new_vehicle_name' %}">	<button type="button" class="btn btn-primary btn-lg">Add new vehicle</button></a></h2>
+
 			{% for Bus in buses %}
-			<div class="bus">
 				<h2>Model: {{ Bus.brand }}</h2>
 				<p>Plate: {{ Bus.plate_nr }}</p>
 				<p>Capacity: {{ Bus.people_capacity }}</p>
@@ -16,29 +15,29 @@
 				<p>Available for cutomers: {{Bus.available_for_cutomers}}</p>
 				<p>Current driver: {{Bus.currentDriver}}</p>
 				<a href="{% url 'vehicle_details' pk=Bus.pk %}"><button type="button" class="btn btn-primary btn-md">details</button> </a>
-				<div id="reservationsList">
+				<div>
 					<p>
-						<p>Reservation of this Bus</p>
-						<table class="foobar" cellpadding="5" cellspacing="5">
-							<tr>
-								<td>Date</td><td>End date</td><td>Days</td><td>Client Name</td> <td>Client email</td> <td>Client Phone</td> <td>[km]</td> <td>Details</td>
-							</tr>
-								{%for r in res%}
-									{%if r.reBusID == Bus %}
-									<tr>
-										<td>{{r.reDate}}</td><td>{{r.EndDate}}</td><td>{{r.numOfDays}}</td><td>{{r.clientName}}</td> <td>{{r.clientEmail}}</td> <td>{{r.clientPhone}}</td> <td>{{r.km}}</td> <td>{{r.details}}</td>
-									</tr>
-									{% endif %}
-								{% endfor %}
-					 	</table>
+					<p>Reservation of this Bus</p>
+					<table class="rezerwacje">
+						<tr>
+							<td>Date</td><td>End date</td><td>Days</td><td>Client Name</td> <td>Client email</td> <td>Client Phone</td> <td>[km]</td> <td>Details</td>
+						</tr>
+							{%for r in res%}
+								{%if r.reBusID == Bus %}
+								<tr>
+									<td>{{r.reDate}}</td><td>{{r.EndDate}}</td><td>{{r.numOfDays}}</td><td>{{r.clientName}}</td> <td>{{r.clientEmail}}</td> <td>{{r.clientPhone}}</td> <td>{{r.km}}</td> <td>{{r.details}}</td>
+								</tr>
+								{% endif %}
+							{% endfor %}
+				 	</table>
 				</div>
-			</div>
-			{% endfor %}
+				{% endfor %}
 		</div>
-		<div class="driverList" id="prawy">
-			<h2>Lista Kierowcow</h2>
+
+		<div class="col-sm-4">
+			<h2>Drivers list</h2>
 			<a href="{% url 'driver' %}"><button type="button" class="btn btn-primary btn-md">New Driver</button> </a>
-			<table class="foobar" cellpadding="5" cellspacing="5">
+			<table class="listakierowcow">
 				<tr>
 					<td>Name</td>	<td>Phone</td><td></td>
 				</tr>

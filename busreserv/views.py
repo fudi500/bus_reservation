@@ -177,7 +177,7 @@ def reservation_details_view(request, pk, bus):
         api = SmsAPI()
 
         api.set_username('busreservation500@gmail.com')
-        api.set_password('sidneypolak123')
+        api.set_password('haslo SmsAPI.pl')
 
         api.service('sms').action('send')
 

@@ -1,18 +1,13 @@
 {% extends 'busreserv/base.html' %}
 
-
 {% block content %}
 
-
-		{% if not buses %}
+	{% if not buses %}
 		<h2>No avilable buses :(, try another time.)</h2>
-		{% endif %}
+	{% endif %}
 
-
-		{% for Bus in buses %}
-
-
-                <div class="bus">
+	{% for Bus in buses %}
+            <div class="bus">
 				<h2>Model: {{ Bus.brand }}</h2>
 				<p>Plate: {{ Bus.plate_nr }}</p>
 				<p>Capacity: {{ Bus.people_capacity }}</p>
@@ -21,9 +16,6 @@
 				<p>Description: {{ Bus.description }}</p>
 
 				<a href="{% url 'newreservation_name' pk=Bus.pk %}"><button type="button" class="btn btn-primary btn-md">Reservation</button> </a>
-
-
-
-			    </div>
-		{% endfor %}
+		    </div>
+	{% endfor %}
 {% endblock content %}

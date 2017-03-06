@@ -7,9 +7,9 @@ urlpatterns = [
 
     url(r'^reservation/(?P<pk>[0-9]+)/$', views.reservation_view, name='newreservation_name'),
     url(r'^reservation/new/(?P<pk>[0-9]+)/$', views.reservation_view, name='details'),
-    url(r'^reservation/details/(?P<pk>[0-9]+)/(?P<bus>[0-9]+)/$', views.reservation_details_view, name='reservation_details'),
 
     url(r'^panel/$', views.panel_view, name='panel'),
+    url(r'^reservation/details/(?P<pk>[0-9]+)/(?P<bus>[0-9]+)/$', views.reservation_details_view, name='reservation_details'),
 
     url(r'^panel/bus/edit/(?P<pk>[0-9]+)/$', views.edit_vehicle_view, name='edit_vehicle'),
     url(r'^panel/bus/details/(?P<pk>[0-9]+)/$', views.vehicle_details_view, name='vehicle_details'),

@@ -1,0 +1,39 @@
+    {% load staticfiles %}
+    <html>
+        <head>
+            <title>Bus Reservation "JanuszTrans"</title>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="{% static 'css/busreserv.css' %}">
+        </head>
+
+        <body>
+            <div class="container" id="menu">
+              <div class="row">
+                ...
+              </div>
+            </div>
+
+            <div class="page-header">
+                <h2><a href="/">Bus Reservation "JanuszTrans"</a></h2>
+                <p align="right"><a href="/panel"><button type="button" class="btn btn-primary btn-md">Admin panel</button></a></p>
+            </div>
+
+            <div class="container" id="tresc">
+              <div class="row">
+
+                  {% block content %}
+                  {% endblock %}
+
+              </div>
+            </div>
+
+            <div class="container" id="stopka">
+              <div class="row">
+                  Copyright © 2017 -
+                  <a href="/">Bus Reservation "JanuszTrans"</a>
+                  - Contat us
+              </div>
+            </div>
+        </body>
+    </html>

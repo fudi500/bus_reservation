@@ -10,87 +10,31 @@
     text-decoration: none;
 }
 
-#stopka {
-width: 100%;
-position: fixed;
-height: 40px;
-background: #ff9400;
-bottom: 0;
-font-size: 12px;
-text-align: center;
-padding: 10px 20px 20px 20px
-}
-
-#stopka p, #stopka p a, .stopka h2 a:visited, .stopka h2 a:active {
-    color: #ffffff;
-    font-size: 12pt;
-    text-decoration: none;
-}
-
-#caly{
-    width: 100%; /* minimalna długość środka */
-}
-
-#lewy {
-    width: 50%;
-    float: left;
-
-}
-
-#prawy {
-    width: 50%;
-    float: left;
-    margin-left: 20px;
-}
-
-#listaki
-
 .content {
-    margin-left: 40px;
+    margin-left: 1px
+    margin-bottom: 60px;
 }
 
 h1, h2, h3, h4 {
     font-family: 'Lobster', cursive;
 }
 
-.date {
-    float: right;
-    color: #828282;
+
+table.rezerwacje{
+    font-size: 12px;
+    text-align: center;
+
 }
 
-.save {
-    float: right;
-}
-
-.post-form textarea, .post-form input {
-    width: 100%;
-}
-
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
-}
-
-.bus {
-    margin-bottom: 70px;
-}
-
-.bus h2 a, .bus h2 a:visited {
-    color: #000000;
-}
-
-
-table.foobar {
-      border: solid grey 1px;
-      border-spacing: 10px;
-  }
-table.foobar td {
-      border: solid grey 1px;
+table.rezerwacje td {
+      padding: 5px;
   }
 
-.driverList {
-    font-size: 30px;
-    padding: 5px 50px 5px 5px;
+table.listakierowcow{
+
+  text-align: center;
+
+}
+table.listakierowcow td {
+    padding: 5px;
 }
