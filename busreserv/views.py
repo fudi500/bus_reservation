@@ -16,19 +16,24 @@ from smsapi.client import SmsAPI
 def panel_view(request):
     buses = Bus.objects.all()
     drivers = Driver.objects.all()
-    res = Reservation.objects.all()
 
     # colect list of reservation in future
+    # take reservations (__gte - greater than or equal)
+    res = Reservation.objects.filter(reDate__gte=date.today())
+
+    """"  old version
+    res = Reservation.objects.all()
     resfuture = []
     for item in res:
         #if is in the furure
         if item.reDate >= date.today():
             resfuture.append(item)
+    """
 
     return render(request, 'busreserv/panel.html', {
         'buses' : buses,
         'drivers':drivers,
-        'res': resfuture,
+        'res': res,
     })
 
 def new_driver_view(request):
@@ -140,7 +145,7 @@ def reservation_details_view(request, pk, bus):
     #----sending Email-------------
     """
     subject1 =  str(res.reDate) + ' Bus reservation '
-    message1 = ' '#, res.reDate , " to " , res.EndDate
+    message1 = ''
     html_message = loader.render_to_string(
             'busreserv/message.html',
             {
@@ -163,16 +168,16 @@ def reservation_details_view(request, pk, bus):
 
     #------S M S  to the driver-------------
     """
-    kierowca = Driver()
-    kierowca = Driver.objects.get(id=bus.currentDriver.id)
+    driversms = Driver()
+    driversms = Driver.objects.get(id=bus.currentDriver.id)
 
-    #jeśli kierowca istnieje (jest przypisany do autobusu bo nie jest to wymagane)
+    # if driver exist (in Bus.model currentDriver in not required)
     if kierowca:
-        #jesli wyjazd jednodniowy
+        # if reservatnion for 1 day
         if res.reDate == res.EndDate:
-            wiadomosc = 'Witaj '+ kierowca.driverName + '. Rezerwacja ' + bus.plate_nr +" Data: "+ str(res.reDate)
+            messageSMS = 'Witaj '+ kierowca.driverName + '. Rezerwacja ' + bus.plate_nr +" Data: "+ str(res.reDate)
         else:
-            wiadomosc = 'Witaj '+ kierowca.driverName + '. Rezerwacja ' + bus.plate_nr +" od "+ str(res.reDate) + " do " + str(res.EndDate)
+            messageSMS = 'Witaj '+ kierowca.driverName + '. Rezerwacja ' + bus.plate_nr +" od "+ str(res.reDate) + " do " + str(res.EndDate)
 
         api = SmsAPI()
 
@@ -181,8 +186,8 @@ def reservation_details_view(request, pk, bus):
 
         api.service('sms').action('send')
 
-        api.set_content(wiadomosc)
-        api.set_to(kierowca.driverPhone)
+        api.set_content(messageSMS)
+        api.set_to(driversms.driverPhone)
 
         result = api.execute()
     """

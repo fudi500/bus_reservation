@@ -83,11 +83,11 @@ class ReservationForm(forms.ModelForm):
                 raise forms.ValidationError("You can make a reservation for max 14 days")
 
             #  cheacking if reservation  for this bus is free
-            res_all = Reservation.objects.all()
+            res_all = Reservation.objects.all().filter(reBusID=self.instance.reBusID)
             for item in res_all:
 
                 #czy rezerwacja od tego autobusu
-                if item.reBusID == self.instance.reBusID:
+                #if item.reBusID == self.instance.reBusID:
 
                     #jesli w przedziale nowego zamowienia jest poczatek albo koniec innego to zajęte
                     if reDate <= item.reDate and item.reDate <= EndDate or reDate <= item.EndDate and item.EndDate <= EndDate:
