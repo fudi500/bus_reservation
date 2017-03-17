@@ -22,7 +22,7 @@ The project designed to develop the skills of programming Python + Django. Speci
 * Bootstrap
 * Linux
   
-### You can see the ten project online here:
+### You can see this ten project online here:
 * http://fudi555.pythonanywhere.com/
 * http://fudi555.pythonanywhere.com/panel
   
