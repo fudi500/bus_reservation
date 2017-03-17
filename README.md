@@ -23,7 +23,8 @@ The project designed to develop the skills of programming Python + Django. Speci
 * Linux
   
 ### You can see the ten project online here:
-  - http://fudi555.pythonanywhere.com/
+http://fudi555.pythonanywhere.com/
+http://fudi555.pythonanywhere.com/panel
   
 
 ### How ro run on linux. 
